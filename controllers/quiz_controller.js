@@ -1,5 +1,8 @@
 exports.question = function (req, res) {
-    res.render('quizes/question', {pregunta: 'Capital de Italia'});
+    res.render('quizes/question', {
+        pregunta: 'Capital de Italia',
+        title: 'Quiz'
+    });
 };
 
 exports.answer = function (req, res) {
@@ -10,5 +13,8 @@ exports.answer = function (req, res) {
         result = 'Wrong!';
     }
 
-    res.render('quizes/answer', {respuesta: result});
+    res.render('quizes/answer', {
+        respuesta: result,
+        title: 'Quiz'
+    });
 };
