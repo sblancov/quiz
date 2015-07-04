@@ -1,25 +1,36 @@
 var models = require('../models/models.js');
+var title = 'Quiz';
 
-exports.question = function (req, res) {
-    models.Quiz.findAll().then(function (quiz) {
-        res.render('quizes/question', {
-            question: quiz[0].question,
-            title: 'Quiz'
+exports.index = function (req, res) {
+    models.Quiz.findAll().then(function (quizes) {
+        res.render('quizes/index', {
+            quizes: quizes,
+            title: title
+        });
+    });
+};
+
+exports.show = function (req, res) {
+    models.Quiz.find(req.params.quizId).then(function (quiz) {
+        res.render('quizes/show', {
+            quiz: quiz,
+            title: title
         });
     });
 };
 
 exports.answer = function (req, res) {
-    models.Quiz.findAll().then(function (quiz) {
+    models.Quiz.find(req.params.quizId).then(function (quiz) {
         var answer = 'Right!';
-        var isRome = req.query.answer === quiz[0].answer;
-        if (!isRome) {
+        var isRight = req.query.answer === quiz.answer;
+        if (!isRight) {
             answer = 'Wrong!';
         }
 
         res.render('quizes/answer', {
             answer: answer,
-            title: 'Quiz'
+            quiz: quiz,
+            title: title
         });
     });
 };
