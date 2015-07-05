@@ -1,6 +1,6 @@
 var path = require('path');
 
-var url = process.env.DATABASE_URL.match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/);
+var url = process.env.DATABASE_URL.match(/(.*)\:\/\/(.*)\:(.*)@(.*)\:(.*)\/(.*)/);
 var DBname = (url[6] || null);
 var user = (url[2] || null);
 var pwd = (url[3] || null);
@@ -32,13 +32,13 @@ sequelize.sync().then(function () {
                 question: 'Capital of Italy',
                 answer: 'Rome'
             }).then(function () {
-                console.log('Data base initialized.');
+                console.log('Italy created.');
             });
             Quiz.create({
                 question: 'Capital of Portugal',
                 answer: 'Lisboa'
             }).then(function () {
-                console.log('Data base initialized.');
+                console.log('Portugal created.');
             });
         }
     });

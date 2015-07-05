@@ -11,7 +11,8 @@ exports.index = function (req, res) {
 };
 
 exports.show = function (req, res) {
-    models.Quiz.find(req.params.quizId).then(function (quiz) {
+    models.Quiz.findById(req.params.quizId).then(function (quiz) {
+        console.log('quiz: ' + quiz);
         res.render('quizes/show', {
             quiz: quiz,
             title: title
@@ -20,15 +21,17 @@ exports.show = function (req, res) {
 };
 
 exports.answer = function (req, res) {
-    models.Quiz.find(req.params.quizId).then(function (quiz) {
-        var answer = 'Right!';
-        var isRight = req.query.answer === quiz.answer;
+    models.Quiz.findById(req.params.quizId).then(function (quiz) {
+        var result = 'Right';
+        var answer = req.query.answer;
+        var isRight = answer === quiz.answer;
         if (!isRight) {
-            answer = 'Wrong!';
+            result = 'Wrong';
         }
 
         res.render('quizes/answer', {
             answer: answer,
+            result: result,
             quiz: quiz,
             title: title
         });
